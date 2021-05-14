@@ -4,10 +4,14 @@ using UnityEngine;
 public class FruitMovement : MonoBehaviour
 {
     [SerializeField] float gridMovementDuration;
+    [SerializeField] float swipeDelta;
 
     private PlayerInput playerInput;
 
     private bool isGridMoving;
+
+    private Vector3 touchStartPosition;
+    private Vector3 currentTouchPosition;
 
     private void Awake()
     {
@@ -16,13 +20,34 @@ public class FruitMovement : MonoBehaviour
 
     void Update()
     {
-        if (playerInput.swipeDirection == Vector3.up)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            StartCoroutine(GridMovement(Vector3.up));
+            touchStartPosition = Input.mousePosition;
         }
-        else if (playerInput.swipeDirection == Vector3.down)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
-            StartCoroutine(GridMovement(Vector3.down));
+            currentTouchPosition = Input.GetTouch(0).position;
+
+            if ((currentTouchPosition.y > touchStartPosition.y) && Mathf.Abs(currentTouchPosition.y - touchStartPosition.y) > swipeDelta)
+            {
+                StartCoroutine(GridMovement(Vector3.forward));
+                Debug.Log("Up");
+            }
+            else if ((currentTouchPosition.y < touchStartPosition.y) && Mathf.Abs(currentTouchPosition.y - touchStartPosition.y) > swipeDelta)
+            {
+                StartCoroutine(GridMovement(Vector3.back));
+                Debug.Log("Down");
+            }
+            //else if ((currentTouchPosition.x > touchStartPosition.x) && Mathf.Abs(currentTouchPosition.x - touchStartPosition.x) > swipeDelta)
+            //{
+            //    swipeDirection = Vector3.right;
+            //    Debug.Log("Right");
+            //}
+            //else if ((currentTouchPosition.x < touchStartPosition.x) && Mathf.Abs(currentTouchPosition.x - touchStartPosition.x) > swipeDelta)
+            //{
+            //    swipeDirection = Vector3.left;
+            //    Debug.Log("Left");
+            //}
         }
     }
 
