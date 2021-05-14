@@ -9,10 +9,10 @@ public class FruitGridCheck : MonoBehaviour
 
     private void Update()
     {
-        forwardOrigin = transform.position + new Vector3(0f, 0f, 0.5f);
-        backOrigin = transform.position + new Vector3(0f, 0f, -0.5f);
-        leftOrigin = transform.position + new Vector3(-0.5f, 0f, 0f);
-        rightOrigin = transform.position + new Vector3(0.5f, 0f, 0f);
+        forwardOrigin = transform.position + new Vector3(0f, -0.4f, 0.5f);
+        backOrigin = transform.position + new Vector3(0f, -0.4f, -0.5f);
+        leftOrigin = transform.position + new Vector3(-0.5f, -0.4f, 0f);
+        rightOrigin = transform.position + new Vector3(0.5f, -0.4f, 0f);
 
         Debug.DrawLine(forwardOrigin, forwardOrigin + new Vector3(0f, 0f, raycastLength), SetRaycastColor(CanMoveForward()));
         Debug.DrawLine(backOrigin, backOrigin + new Vector3(0f, 0f, -raycastLength), SetRaycastColor(CanMoveBack()));
