@@ -3,73 +3,52 @@ using UnityEngine;
 
 public class FruitMovement : MonoBehaviour
 {
-    [SerializeField] float gridMovementDuration;
+    [SerializeField] float movementSpeed;
     [SerializeField] float swipeDelta;
 
-    private PlayerInput playerInput;
-
-    private bool isGridMoving;
+    private bool isTouching;
 
     private Vector3 touchStartPosition;
-    private Vector3 currentTouchPosition;
 
-    private void Awake()
+    private Vector3 targetPosition;
+
+    private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
+        targetPosition = transform.position;
     }
 
     void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
-            touchStartPosition = Input.mousePosition;
+            touchStartPosition = Input.touches[0].position;
+            isTouching = true;
         }
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            currentTouchPosition = Input.GetTouch(0).position;
 
-            if ((currentTouchPosition.y > touchStartPosition.y) && Mathf.Abs(currentTouchPosition.y - touchStartPosition.y) > swipeDelta)
+        if (isTouching)
+        {
+            if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta)
             {
-                StartCoroutine(GridMovement(Vector3.forward));
-                Debug.Log("Up");
+                isTouching = false;
+                SetTargetPosition(Vector3.forward);
             }
-            else if ((currentTouchPosition.y < touchStartPosition.y) && Mathf.Abs(currentTouchPosition.y - touchStartPosition.y) > swipeDelta)
+            else if (Input.GetTouch(0).position.y <= touchStartPosition.y - swipeDelta)
             {
-                StartCoroutine(GridMovement(Vector3.back));
-                Debug.Log("Down");
+                isTouching = false;
+                SetTargetPosition(Vector3.back);
             }
-            //else if ((currentTouchPosition.x > touchStartPosition.x) && Mathf.Abs(currentTouchPosition.x - touchStartPosition.x) > swipeDelta)
-            //{
-            //    swipeDirection = Vector3.right;
-            //    Debug.Log("Right");
-            //}
-            //else if ((currentTouchPosition.x < touchStartPosition.x) && Mathf.Abs(currentTouchPosition.x - touchStartPosition.x) > swipeDelta)
-            //{
-            //    swipeDirection = Vector3.left;
-            //    Debug.Log("Left");
-            //}
         }
+
+        MoveFruit();
     }
 
-    private IEnumerator GridMovement(Vector3 direction)
+    private void SetTargetPosition(Vector3 direction)
     {
-        isGridMoving = true;
+        targetPosition += direction;
+    }
 
-        float elapsedTime = 0;
-
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + direction;
-
-        while (elapsedTime < gridMovementDuration)
-        {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, (elapsedTime / gridMovementDuration));
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.position = targetPosition;
-
-        isGridMoving = false;
+    private void MoveFruit()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed);
     }
 }
