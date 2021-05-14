@@ -4,17 +4,20 @@ using UnityEngine;
 public class FruitMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed;
+    [SerializeField] float flipSpeed;
     [SerializeField] float swipeDelta;
 
     private bool isTouching;
+    private bool isFlipping;
 
     private Vector3 touchStartPosition;
 
-    private Vector3 targetPosition;
+    private Vector3 movementTargetPosition;
+
 
     private void Start()
     {
-        targetPosition = transform.position;
+        movementTargetPosition = transform.position;
     }
 
     void Update()
@@ -37,18 +40,70 @@ public class FruitMovement : MonoBehaviour
                 isTouching = false;
                 SetTargetPosition(Vector3.back);
             }
+            else if (Input.GetTouch(0).position.x >= touchStartPosition.x + swipeDelta)
+            {
+                isTouching = false;
+                if (!isFlipping)
+                {
+                    StartCoroutine(FlipFruit(Vector3.right));
+                }
+            }
+            else if (Input.GetTouch(0).position.x <= touchStartPosition.x - swipeDelta)
+            {
+                isTouching = false;
+                if (!isFlipping)
+                {
+                    StartCoroutine(FlipFruit(Vector3.left));
+                }
+            }
         }
 
-        MoveFruit();
+        if (!isFlipping)
+        {
+            MoveFruit();
+        }
     }
 
     private void SetTargetPosition(Vector3 direction)
     {
-        targetPosition += direction;
+        movementTargetPosition += direction;
     }
 
     private void MoveFruit()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, movementTargetPosition, movementSpeed);
+    }
+
+    private IEnumerator FlipFruit(Vector3 flipDirection)
+    {
+        isFlipping = true;
+
+        Vector3 rotAxis = Vector3.Cross(Vector3.up, flipDirection);
+        Vector3 pivot = (transform.position + Vector3.down * 0.5f) + flipDirection * 0.5f;
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.AngleAxis(90.0f, rotAxis) * startRotation;
+
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = transform.position + flipDirection;
+
+        float rotSpeed = 90.0f / flipSpeed;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < flipSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < flipSpeed)
+            {
+                transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        transform.rotation = endRotation;
+        transform.position = endPosition;
+        movementTargetPosition = transform.position;
+
+        isFlipping = false;
     }
 }
