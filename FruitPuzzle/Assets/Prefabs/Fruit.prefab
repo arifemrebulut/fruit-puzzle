@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1044615912
 Transform:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1143125181
 Transform:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1285790248
 Transform:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1372562522
 Transform:
   m_ObjectHideFlags: 0
@@ -441,6 +441,8 @@ GameObject:
   - component: {fileID: 5077390277198256492}
   - component: {fileID: 1534050602251150741}
   - component: {fileID: 970205665902809415}
+  - component: {fileID: 1150117904}
+  - component: {fileID: 1150117905}
   m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
@@ -525,7 +527,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0.1
   flipSpeed: 0.2
-  swipeDelta: 50
+  swipeDelta: 80
+--- !u!114 &1150117904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970205665902809417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fb742c9c3df1546a2ae273e8af6cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avaibleGridLayers:
+    serializedVersion: 2
+    m_Bits: 768
+  raycastLength: 0.7
+--- !u!114 &1150117905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970205665902809417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940cf021c24f19e489e4b8dff63c2885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topCover: {fileID: 1285790247}
+  bottomCover: {fileID: 1044615911}
+  leftCover: {fileID: 1143125180}
+  rightCover: {fileID: 1372562521}
+  chocolateGridLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  raycastLength: 0.6
 --- !u!1 &970205666286488721
 GameObject:
   m_ObjectHideFlags: 0

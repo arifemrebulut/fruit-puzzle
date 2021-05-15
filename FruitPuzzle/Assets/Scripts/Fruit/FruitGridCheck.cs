@@ -13,11 +13,6 @@ public class FruitGridCheck : MonoBehaviour
         backOrigin = transform.position + new Vector3(0f, -0.4f, -0.5f);
         leftOrigin = transform.position + new Vector3(-0.5f, -0.4f, 0f);
         rightOrigin = transform.position + new Vector3(0.5f, -0.4f, 0f);
-
-        Debug.DrawLine(forwardOrigin, forwardOrigin + new Vector3(0f, 0f, raycastLength), SetRaycastColor(CanMoveForward()));
-        Debug.DrawLine(backOrigin, backOrigin + new Vector3(0f, 0f, -raycastLength), SetRaycastColor(CanMoveBack()));
-        Debug.DrawLine(leftOrigin, leftOrigin + new Vector3(-raycastLength, 0f, 0f), SetRaycastColor(CanMoveLeft()));
-        Debug.DrawLine(rightOrigin, rightOrigin + new Vector3(raycastLength, 0f, 0f), SetRaycastColor(CanMoveRight()));
     }
 
     public bool CanMoveForward()
@@ -54,14 +49,5 @@ public class FruitGridCheck : MonoBehaviour
         canMoveRight = Physics.Raycast(rightOrigin, Vector3.right, raycastLength, avaibleGridLayers);
 
         return canMoveRight;
-    }
-
-    private Color SetRaycastColor(bool canMove)
-    {
-        Color lineColor;
-
-        lineColor = (canMove) ? Color.green : Color.red;
-
-        return lineColor;
     }
 }
