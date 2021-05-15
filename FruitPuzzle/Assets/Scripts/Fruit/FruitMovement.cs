@@ -29,7 +29,7 @@ public class FruitMovement : MonoBehaviour
             isTouching = true;
         }
 
-        if (isTouching)
+        if (isTouching && Input.touchCount > 0)
         {
             if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta && fruitGridCheck.CanMoveForward())
             {
