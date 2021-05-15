@@ -1,53 +1,65 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using DG.Tweening;
 
 public class FruitAnimations : MonoBehaviour
 {
-    [Header("Jump Animation")]
+    [Header("Jump Animations")]
     [Space(20)]
     [SerializeField] float jumpScaleAnimationDuration;
     [SerializeField] float jumpMoveAnimatiomDuration;
     [SerializeField] float jumpYMoveValue, jumpYScaleValue, jumpXScaleValue;
 
-    [Header("Cant Jump Animation")]
+    [Header("Cant Jump Animations")]
     [Space(20)]
     [SerializeField] float cantJumpAnimationDuration;
     [SerializeField] float cantJumpXMoveValue, cantJumpYMoveValue, cantJumpZMoveValue;
     [SerializeField] float cantJumpRotationAmount;
- 
 
+    [Header("Fruit Complete Animations")]
+    [Space(20)]
+    [SerializeField] float fruitCompleteYMoveValue;
+    [SerializeField] float fruitCompleteYMoveDuration, fruitCompleteSpinDuration;
+    [SerializeField] Vector3 fruitCompleteScaleAmount;
+    [SerializeField] List<GameObject> fruitCompleteParticleEffects;
+
+    #region Subscribing and Unsubscribing to events for Playing Animations
     private void OnEnable()
     {
-        EventBroker.OnJump += PlayJumpAnimation;
+        EventBroker.OnJump += PlayJumpAnimations;
         EventBroker.OnCantJump += PlayCantJumpAnimations;
+        EventBroker.OnFlipping += PlayFlippingAnimations;
+        EventBroker.OnFruitComplete += PlayFruitCompleteAnimation;
     }
 
     private void OnDisable()
     {
-        EventBroker.OnJump -= PlayJumpAnimation;
+        EventBroker.OnJump -= PlayJumpAnimations;
         EventBroker.OnCantJump -= PlayCantJumpAnimations;
+        EventBroker.OnFlipping -= PlayFlippingAnimations;
+        EventBroker.OnFruitComplete -= PlayFruitCompleteAnimation;
     }
+    #endregion
 
-    private void PlayJumpAnimation()
+    private void PlayJumpAnimations()
     {
-        transform.DOMoveY(jumpYMoveValue, jumpMoveAnimatiomDuration).SetLoops(2, LoopType.Yoyo);
+        transform.DOMoveY(transform.position.y + jumpYMoveValue, jumpMoveAnimatiomDuration).SetLoops(2, LoopType.Yoyo);
         JumpScaleAnimation();
     }
 
     private void PlayCantJumpAnimations(Vector3 direction)
     {
-        Vector3 animationDirection;
+        transform.DOMoveY(transform.position.y + cantJumpYMoveValue, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
 
-        transform.DOMoveY((transform.position + new Vector3(0f, cantJumpYMoveValue, 0f)).y, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
         JumpScaleAnimation();
 
         if (direction == Vector3.forward)
         {
-            transform.DOMoveZ((transform.position + new Vector3(0f, 0f, cantJumpZMoveValue)).z, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
+            transform.DOMoveZ(transform.position.z + cantJumpZMoveValue, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
         }
         if (direction == Vector3.back)
         {
-            transform.DOMoveZ((transform.position + new Vector3(0f, 0f, -cantJumpZMoveValue)).z, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
+            transform.DOMoveZ(transform.position.z - cantJumpZMoveValue, cantJumpAnimationDuration).SetLoops(2, LoopType.Yoyo);
         }
         if (direction == Vector3.left)
         {
@@ -61,14 +73,26 @@ public class FruitAnimations : MonoBehaviour
         }
     }
 
-    private void JumpScaleAnimation()
+    private void PlayFlippingAnimations()
     {
-        transform.DOScaleY(jumpYScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo);
-        transform.DOScaleX(jumpXScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo);
+        transform.DOMoveY(transform.position.y + jumpYMoveValue, jumpMoveAnimatiomDuration).SetLoops(2, LoopType.Yoyo);
+        JumpScaleAnimation();
     }
 
-    private void PlayLevelCompletedAnimations()
+    private void JumpScaleAnimation()
     {
-        
+        transform.DOScaleY(transform.localScale.y + jumpYScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuint);
+        transform.DOScaleX(transform.localScale.x + jumpXScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuint);
+    }
+
+    private void PlayFruitCompleteAnimation()
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOMoveY((transform.position + new Vector3(0f, fruitCompleteYMoveValue, 0f)).y,
+            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad));
+
+        sequence.Append(transform.DORotate((transform.localEulerAngles + new Vector3(0f, 0f, 270f)),
+            fruitCompleteSpinDuration, RotateMode.Fast).SetLoops(2, LoopType.Incremental));
     }
 }

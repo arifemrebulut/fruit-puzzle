@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class FruitChocolateCovering : MonoBehaviour
 {
@@ -6,23 +8,53 @@ public class FruitChocolateCovering : MonoBehaviour
     [SerializeField] LayerMask chocolateGridLayer;
     [SerializeField] float raycastLength;
 
+    private bool isTopCovered, isBottomCovered, isLeftCovered, isRightCovered;
+
+    private List<bool> surfacesToCover;
+
+    private bool isGameRunning;
+
+    private void Awake()
+    {
+        surfacesToCover = new List<bool>() { isTopCovered, isBottomCovered, isLeftCovered, isRightCovered };
+        isGameRunning = true;
+    }
+
     void Update()
     {
-        if (Physics.Raycast(transform.position, transform.up, raycastLength, chocolateGridLayer))
+        if (isGameRunning)
         {
-            topCover.SetActive(true);
+            if (Physics.Raycast(transform.position, transform.up, raycastLength, chocolateGridLayer))
+            {
+                topCover.SetActive(true);
+                surfacesToCover[0] = true;
+            }
+            if (Physics.Raycast(transform.position, -transform.up, raycastLength, chocolateGridLayer))
+            {
+                bottomCover.SetActive(true);
+                surfacesToCover[1] = true;
+            }
+            if (Physics.Raycast(transform.position, -transform.right, raycastLength, chocolateGridLayer))
+            {
+                leftCover.SetActive(true);
+                surfacesToCover[2] = true;
+            }
+            if (Physics.Raycast(transform.position, transform.right, raycastLength, chocolateGridLayer))
+            {
+                rightCover.SetActive(true);
+                surfacesToCover[3] = true;
+            }
+
+            CheckAllSurfacesAreCovered();
         }
-        if (Physics.Raycast(transform.position, -transform.up, raycastLength, chocolateGridLayer))
+    }
+
+    private void CheckAllSurfacesAreCovered()
+    {
+        if (surfacesToCover.All(x => x == true))
         {
-            bottomCover.SetActive(true);
-        }
-        if (Physics.Raycast(transform.position, -transform.right, raycastLength, chocolateGridLayer))
-        {
-            leftCover.SetActive(true);
-        }
-        if (Physics.Raycast(transform.position, transform.right, raycastLength, chocolateGridLayer))
-        {
-            rightCover.SetActive(true);
+            EventBroker.CallOnFruitComplete();
+            isGameRunning = false;
         }
     }
 }

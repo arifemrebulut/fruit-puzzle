@@ -1,13 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-public class EventBroker : MonoBehaviour
+public class EventBroker
 {
     public static Action OnJump;
     public static Action<Vector3> OnCantJump;
+    public static Action OnFlipping;
+    public static Action OnFruitComplete;
 
     public static void CallOnJump()
     {
+        Debug.Log("JumpCalled");
+
         if (OnJump != null)
         {
             OnJump();
@@ -19,6 +23,22 @@ public class EventBroker : MonoBehaviour
         if (OnCantJump != null)
         {
             OnCantJump(direction);
+        }
+    }
+
+    public static void CallOnFlipping()
+    {
+        if (OnFlipping != null)
+        {
+            OnFlipping();
+        }
+    }
+
+    public static void CallOnFruitComplete()
+    {
+        if (OnFruitComplete != null)
+        {
+            OnFruitComplete();
         }
     }
 }

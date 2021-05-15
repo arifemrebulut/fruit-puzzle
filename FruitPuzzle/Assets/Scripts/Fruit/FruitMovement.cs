@@ -3,27 +3,24 @@ using UnityEngine;
 
 public class FruitMovement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed;
+    [SerializeField] float movementDuration;
     [SerializeField] float flipSpeed;
     [SerializeField] float swipeDelta;
 
-    private bool isTouching;
-    private bool isFlipping;
+    private bool isTouching, isMoving, isFlipping, isCantJumping;
 
     private Vector3 touchStartPosition;
-    private Vector3 movementTargetPosition;
 
     FruitGridCheck fruitGridCheck;
 
     private void Start()
     {
         fruitGridCheck = GetComponent<FruitGridCheck>();
-        movementTargetPosition = transform.position;
     }
 
     void Update()
     {
-        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began && !isFlipping && !isMoving && !isCantJumping)
         {
             touchStartPosition = Input.touches[0].position;
             isTouching = true;
@@ -36,12 +33,13 @@ public class FruitMovement : MonoBehaviour
                 if (fruitGridCheck.CanMoveForward())
                 {
                     isTouching = false;
-                    SetTargetPosition(Vector3.forward);
+                    isMoving = true;
+                    StartCoroutine(MoveFruit(Vector3.forward));
                 }
                 else
                 {
                     isTouching = false;
-                    CantMove(Vector3.forward);
+                    StartCoroutine(CantMove(Vector3.forward));
                 }
             }
             else if (Input.GetTouch(0).position.y <= touchStartPosition.y - swipeDelta)
@@ -49,12 +47,13 @@ public class FruitMovement : MonoBehaviour
                 if (fruitGridCheck.CanMoveBack())
                 {
                     isTouching = false;
-                    SetTargetPosition(Vector3.back);
+                    isMoving = true;
+                    StartCoroutine(MoveFruit(Vector3.back));
                 }
                 else
                 {
                     isTouching = false;
-                    CantMove(Vector3.back);
+                    StartCoroutine(CantMove(Vector3.back));
                 }
             }
             else if (Input.GetTouch(0).position.x >= touchStartPosition.x + swipeDelta)
@@ -62,14 +61,12 @@ public class FruitMovement : MonoBehaviour
                 isTouching = false;
                 if (fruitGridCheck.CanMoveRight())
                 {
-                    if (!isFlipping)
-                    {
-                        StartCoroutine(FlipFruit(Vector3.right));
-                    }
+                    isFlipping = true;
+                    StartCoroutine(FlipFruit(Vector3.right));
                 }
                 else
                 {
-                    CantMove(Vector3.right);
+                    StartCoroutine(CantMove(Vector3.right));
                 }
             }
             else if (Input.GetTouch(0).position.x <= touchStartPosition.x - swipeDelta)
@@ -77,44 +74,45 @@ public class FruitMovement : MonoBehaviour
                 isTouching = false;
                 if (fruitGridCheck.CanMoveLeft())
                 {
-                    if (!isFlipping)
-                    {
-                        StartCoroutine(FlipFruit(Vector3.left));
-                    }
+                    isFlipping = true;
+                    StartCoroutine(FlipFruit(Vector3.left));
                 }
                 else
                 {
-                    CantMove(Vector3.left);
+                    StartCoroutine(CantMove(Vector3.left));
                 }
             }
         }
-
-        if (!isFlipping)
-        {
-            MoveFruit();
-        }
     }
 
-    private void SetTargetPosition(Vector3 direction)
+    private IEnumerator CantMove(Vector3 direction)
     {
-        movementTargetPosition += direction;
-        EventBroker.CallOnJump();
-    }
-
-    private void CantMove(Vector3 direction)
-    {
+        isCantJumping = true;
         EventBroker.CallOnCantJump(direction);
+        yield return new WaitForSecondsRealtime(0.5f);
+        isCantJumping = false;
     }
 
-    private void MoveFruit()
+    private IEnumerator MoveFruit(Vector3 direction)
     {
-        transform.position = Vector3.MoveTowards(transform.position, movementTargetPosition, movementSpeed * Time.deltaTime);
+        float elapsedTime = 0f;
+        Vector3 targetPosition = transform.position + direction;
+
+        EventBroker.CallOnJump();
+
+        while (elapsedTime < movementDuration)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
+
+        isMoving = false;
     }
 
     private IEnumerator FlipFruit(Vector3 flipDirection)
     {
-        isFlipping = true;
-
         Vector3 rotAxis = Vector3.Cross(Vector3.up, flipDirection);
         Vector3 pivot = (transform.position + Vector3.down * 0.5f) + flipDirection * 0.5f;
 
@@ -127,19 +125,17 @@ public class FruitMovement : MonoBehaviour
         float rotSpeed = 90.0f / flipSpeed;
         float elapsedTime = 0f;
 
+        EventBroker.CallOnFlipping();
+
         while (elapsedTime < flipSpeed)
         {
             elapsedTime += Time.deltaTime;
-            if (elapsedTime < flipSpeed)
-            {
-                transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
-                yield return null;
-            }
+            transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
+            yield return null;
         }
 
         transform.rotation = endRotation;
         transform.position = endPosition;
-        movementTargetPosition = transform.position;
 
         isFlipping = false;
     }
