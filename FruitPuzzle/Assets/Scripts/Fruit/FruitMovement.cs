@@ -108,7 +108,7 @@ public class FruitMovement : MonoBehaviour
 
     private void MoveFruit()
     {
-        transform.position = Vector3.MoveTowards(transform.position, movementTargetPosition, movementSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, movementTargetPosition, movementSpeed * Time.deltaTime);
     }
 
     private IEnumerator FlipFruit(Vector3 flipDirection)
