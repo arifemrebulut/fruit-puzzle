@@ -31,30 +31,60 @@ public class FruitMovement : MonoBehaviour
 
         if (isTouching && Input.touchCount > 0)
         {
-            if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta && fruitGridCheck.CanMoveForward())
+            if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta)
             {
-                isTouching = false;
-                SetTargetPosition(Vector3.forward);
-            }
-            else if (Input.GetTouch(0).position.y <= touchStartPosition.y - swipeDelta && fruitGridCheck.CanMoveBack())
-            {
-                isTouching = false;
-                SetTargetPosition(Vector3.back);
-            }
-            else if (Input.GetTouch(0).position.x >= touchStartPosition.x + swipeDelta && fruitGridCheck.CanMoveRight())
-            {
-                isTouching = false;
-                if (!isFlipping)
+                if (fruitGridCheck.CanMoveForward())
                 {
-                    StartCoroutine(FlipFruit(Vector3.right));
+                    isTouching = false;
+                    SetTargetPosition(Vector3.forward);
+                }
+                else
+                {
+                    isTouching = false;
+                    CantMove(Vector3.forward);
                 }
             }
-            else if (Input.GetTouch(0).position.x <= touchStartPosition.x - swipeDelta && fruitGridCheck.CanMoveLeft())
+            else if (Input.GetTouch(0).position.y <= touchStartPosition.y - swipeDelta)
+            {
+                if (fruitGridCheck.CanMoveBack())
+                {
+                    isTouching = false;
+                    SetTargetPosition(Vector3.back);
+                }
+                else
+                {
+                    isTouching = false;
+                    CantMove(Vector3.back);
+                }
+            }
+            else if (Input.GetTouch(0).position.x >= touchStartPosition.x + swipeDelta)
             {
                 isTouching = false;
-                if (!isFlipping)
+                if (fruitGridCheck.CanMoveRight())
                 {
-                    StartCoroutine(FlipFruit(Vector3.left));
+                    if (!isFlipping)
+                    {
+                        StartCoroutine(FlipFruit(Vector3.right));
+                    }
+                }
+                else
+                {
+                    CantMove(Vector3.right);
+                }
+            }
+            else if (Input.GetTouch(0).position.x <= touchStartPosition.x - swipeDelta)
+            {
+                isTouching = false;
+                if (fruitGridCheck.CanMoveLeft())
+                {
+                    if (!isFlipping)
+                    {
+                        StartCoroutine(FlipFruit(Vector3.left));
+                    }
+                }
+                else
+                {
+                    CantMove(Vector3.left);
                 }
             }
         }
@@ -68,6 +98,12 @@ public class FruitMovement : MonoBehaviour
     private void SetTargetPosition(Vector3 direction)
     {
         movementTargetPosition += direction;
+        EventBroker.CallOnJump();
+    }
+
+    private void CantMove(Vector3 direction)
+    {
+        EventBroker.CallOnCantJump(direction);
     }
 
     private void MoveFruit()

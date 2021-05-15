@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class EventBroker : MonoBehaviour
 {
-    public static Action OnMove;
-    public static Action OnCantMove;
+    public static Action OnJump;
+    public static Action<Vector3> OnCantJump;
 
-    public static void CallOnMove()
+    public static void CallOnJump()
     {
-        OnMove();
+        if (OnJump != null)
+        {
+            OnJump();
+        }
     }
 
-    public static void CallOnCantMove()
+    public static void CallOnCantJump(Vector3 direction)
     {
-        OnCantMove();
+        if (OnCantJump != null)
+        {
+            OnCantJump(direction);
+        }
     }
 }
