@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EmptyGridBlock
   - ChocolateGridBlock
+  - Fruit
   layers:
   - Default
   - TransparentFX

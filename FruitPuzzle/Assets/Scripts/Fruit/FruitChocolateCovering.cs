@@ -31,8 +31,7 @@ public class FruitChocolateCovering : MonoBehaviour
             if (Physics.Raycast(transform.position, -transform.up, raycastLength, chocolateGridLayer))
             {
                 bottomCover.SetActive(true);
-                surfacesToCover[1] = true;
-            }
+                surfacesToCover[1] = true;            }
             if (Physics.Raycast(transform.position, -transform.right, raycastLength, chocolateGridLayer))
             {
                 leftCover.SetActive(true);
@@ -52,14 +51,14 @@ public class FruitChocolateCovering : MonoBehaviour
     {
         if (surfacesToCover.All(x => x == true))
         {
-            EventBroker.CallOnFruitComplete();
+            EventBroker.CallOnLevelComplete();
             isFullCovered = true;
         }
     }
 
     public void FinishLevel()
     {
-        EventBroker.CallOnFruitComplete();
+        EventBroker.CallOnLevelComplete();
         isFullCovered = true;
     }
 }

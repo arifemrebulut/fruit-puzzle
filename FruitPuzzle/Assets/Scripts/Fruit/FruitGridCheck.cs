@@ -4,15 +4,16 @@ public class FruitGridCheck : MonoBehaviour
 {
     [SerializeField] LayerMask avaibleGridLayers;
     [SerializeField] float raycastLength;
+    [SerializeField] float raycastPositionYOffset;
 
     Vector3 forwardOrigin, backOrigin, leftOrigin, rightOrigin;
 
     private void Update()
     {
-        forwardOrigin = transform.position + new Vector3(0f, -0.4f, 0.5f);
-        backOrigin = transform.position + new Vector3(0f, -0.4f, -0.5f);
-        leftOrigin = transform.position + new Vector3(-0.5f, -0.4f, 0f);
-        rightOrigin = transform.position + new Vector3(0.5f, -0.4f, 0f);
+        forwardOrigin = transform.position + new Vector3(0f, -raycastPositionYOffset, 0.5f);
+        backOrigin = transform.position + new Vector3(0f, -raycastPositionYOffset, -0.5f);
+        leftOrigin = transform.position + new Vector3(-0.5f, -raycastPositionYOffset, 0f);
+        rightOrigin = transform.position + new Vector3(0.5f, -raycastPositionYOffset, 0f);
     }
 
     public bool CanMoveForward()

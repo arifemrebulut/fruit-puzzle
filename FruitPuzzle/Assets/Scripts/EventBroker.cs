@@ -6,7 +6,7 @@ public class EventBroker
     public static Action OnJump;
     public static Action<Vector3> OnCantJump;
     public static Action OnFlipping;
-    public static Action OnFruitComplete;
+    public static Action OnLevelComplete;
 
     public static void CallOnJump()
     {
@@ -32,11 +32,11 @@ public class EventBroker
         }
     }
 
-    public static void CallOnFruitComplete()
+    public static void CallOnLevelComplete()
     {
-        if (OnFruitComplete != null)
+        if (OnLevelComplete != null)
         {
-            OnFruitComplete();
+            OnLevelComplete();
         }
     }
 }
