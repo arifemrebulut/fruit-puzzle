@@ -92,8 +92,13 @@ public class FruitAnimations : MonoBehaviour
         sequence.Append(transform.DOMoveY(transform.position.y + fruitCompleteYMoveValue,
             fruitCompleteYMoveDuration).SetEase(Ease.OutQuad)).SetDelay(0.5f);
 
-        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 720f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd));
+        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd));
 
         sequence.Join(transform.DOScale(transform.localScale + fruitCompleteScaleAmount, fruitCompleteSpinDuration / 4).SetLoops(4, LoopType.Yoyo));
+    }
+
+    private void PlayFruitCompleteParticleEffects()
+    {
+        
     }
 }
