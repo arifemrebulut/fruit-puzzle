@@ -3,6 +3,13 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
+public enum LevelStats
+{
+    OnPlay,
+    OnLevelComplete,
+    OnFinishScene
+}
+
 public class LevelManager : MonoBehaviour
 {
     [Header("LevelCompleteAnimations")]
@@ -12,6 +19,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<ParticleSystem> levelCompleteParticleEffects;
 
     private Vector3 fruitPosition;
+    public static LevelStats currentLevelStat;
 
     private void OnEnable()
     {
@@ -27,12 +35,22 @@ public class LevelManager : MonoBehaviour
     {
         fruitPosition = FindObjectOfType<FruitMovement>().transform.position;
 
-        greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce);
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce));
+        sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration).SetEase(Ease.OutBounce).SetDelay(2));
 
         for (int i = 0; i < levelCompleteParticleEffects.Count; i++)
         {
             ParticleSystem effect = Instantiate(levelCompleteParticleEffects[i], fruitPosition, transform.rotation);
         }
+
+        SwitchCurrentLevelStat(LevelStats.OnFinishScene);
+    }
+
+    public static void SwitchCurrentLevelStat(LevelStats desiredLevelStat)
+    {
+        currentLevelStat = desiredLevelStat;
     }
 
 }

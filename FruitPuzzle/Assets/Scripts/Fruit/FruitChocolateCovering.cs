@@ -56,6 +56,7 @@ public class FruitChocolateCovering : MonoBehaviour
     {
         if (coveredSurfaces.All(x => x == true))
         {
+            LevelManager.SwitchCurrentLevelStat(LevelStats.OnLevelComplete);
             EventBroker.OnFruitFullCovered();
             isFullCovered = true;
         }
@@ -63,6 +64,7 @@ public class FruitChocolateCovering : MonoBehaviour
 
     public void FinishLevel()
     {
+        LevelManager.SwitchCurrentLevelStat(LevelStats.OnLevelComplete);
         EventBroker.OnFruitFullCovered();
         isFullCovered = true;
     }

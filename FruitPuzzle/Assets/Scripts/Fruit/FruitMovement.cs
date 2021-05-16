@@ -22,13 +22,13 @@ public class FruitMovement : MonoBehaviour
 
     void Update()
     {
-        if (!isTouching && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began && !isFlipping && !isMoving && !isCantJumping)
+        if (!isTouching && !isFlipping && !isMoving && !isCantJumping && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             touchStartPosition = Input.touches[0].position;
             isTouching = true;
         }
 
-        if (isTouching && Input.touchCount > 0)
+        if (isTouching && Input.touchCount > 0 && LevelManager.currentLevelStat == LevelStats.OnPlay)
         {
             if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta)
             {
