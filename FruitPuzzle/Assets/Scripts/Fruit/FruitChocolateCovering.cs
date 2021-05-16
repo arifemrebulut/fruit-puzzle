@@ -10,13 +10,13 @@ public class FruitChocolateCovering : MonoBehaviour
 
     private bool isTopCovered, isBottomCovered, isLeftCovered, isRightCovered;
 
-    private List<bool> surfacesToCover;
+    private List<bool> coveredSurfaces;
 
     private bool isFullCovered;
 
     private void Awake()
     {
-        surfacesToCover = new List<bool>() { isTopCovered, isBottomCovered, isLeftCovered, isRightCovered };
+        coveredSurfaces = new List<bool>() { isTopCovered, isBottomCovered, isLeftCovered, isRightCovered};
     }
 
     void Update()
@@ -26,21 +26,26 @@ public class FruitChocolateCovering : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.up, raycastLength, chocolateGridLayer))
             {
                 topCover.SetActive(true);
-                surfacesToCover[0] = true;
+                isTopCovered = true;
+                coveredSurfaces[0] = isTopCovered;
             }
             if (Physics.Raycast(transform.position, -transform.up, raycastLength, chocolateGridLayer))
             {
                 bottomCover.SetActive(true);
-                surfacesToCover[1] = true;            }
+                isBottomCovered = true;
+                coveredSurfaces[1] = isBottomCovered;
+            }
             if (Physics.Raycast(transform.position, -transform.right, raycastLength, chocolateGridLayer))
             {
                 leftCover.SetActive(true);
-                surfacesToCover[2] = true;
+                isLeftCovered = true;
+                coveredSurfaces[2] = true;
             }
             if (Physics.Raycast(transform.position, transform.right, raycastLength, chocolateGridLayer))
             {
                 rightCover.SetActive(true);
-                surfacesToCover[3] = true;
+                isRightCovered = true;
+                coveredSurfaces[3] = true;
             }
 
             CheckAllSurfacesAreCovered();
@@ -49,7 +54,7 @@ public class FruitChocolateCovering : MonoBehaviour
 
     private void CheckAllSurfacesAreCovered()
     {
-        if (surfacesToCover.All(x => x == true))
+        if (coveredSurfaces.All(x => x == true))
         {
             EventBroker.CallOnLevelComplete();
             isFullCovered = true;

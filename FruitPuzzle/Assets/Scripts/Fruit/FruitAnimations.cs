@@ -5,28 +5,20 @@ using DG.Tweening;
 public class FruitAnimations : MonoBehaviour
 {
     [Header("Jump Animations")]
-    [Space()]
     [SerializeField] float jumpScaleAnimationDuration;
     [SerializeField] float jumpMoveAnimatiomDuration;
     [SerializeField] float jumpYMoveValue, jumpYScaleValue, jumpXScaleValue;
 
     [Header("Cant Jump Animations")]
-    [Space()]
     [SerializeField] float cantJumpAnimationDuration;
     [SerializeField] float cantJumpXMoveValue, cantJumpYMoveValue, cantJumpZMoveValue;
     [SerializeField] float cantJumpRotationAmount;
 
     [Header("Level Complete Animations")]
-    [Space()]
     [SerializeField] float levelCompleteYMoveValue;
     [SerializeField] float levelCompleteYMoveDuration, levelCompleteSpinDuration;
     [SerializeField] Vector3 levelCompleteScaleAmount;
     [SerializeField] List<GameObject> levelCompleteParticleEffects;
-
-    [Header("Particle Effects")]
-    [Space()]
-    [SerializeField] ParticleSystem chocolateSplashParticleEffect;
-    [SerializeField] ParticleSystem chocolateTraceParticleEffect;
 
     #region Subscribing and Unsubscribing to events for Playing Animations
     private void OnEnable()
@@ -80,7 +72,6 @@ public class FruitAnimations : MonoBehaviour
 
     private void PlayFlippingAnimations()
     {
-        transform.DOMoveY(transform.position.y + jumpYMoveValue, jumpMoveAnimatiomDuration).SetLoops(2, LoopType.Yoyo);
         JumpScaleAnimation();
     }
 

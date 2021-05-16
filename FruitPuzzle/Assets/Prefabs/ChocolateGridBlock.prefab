@@ -110,7 +110,6 @@ Transform:
   m_Children:
   - {fileID: 1979273253595058870}
   - {fileID: 6113041877354834238}
-  - {fileID: 2049938605215809315}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b3e35ddfef5bc428298f5addb79ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chocolateSplash: {fileID: 2049938605215809312}
+  chocolateSplash: {fileID: 0}
   emitAmount: 200
 --- !u!1 &3615851276346814087
 GameObject:
@@ -220,84 +219,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1001 &4720802090889740688
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7345346261366939132}
-    m_Modifications:
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6769315072907476670, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-        type: 3}
-      propertyPath: m_Name
-      value: ChocolateSplashParticleEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6b5fe9ec1807f614a8266436d1d5b342, type: 3}
---- !u!4 &2049938605215809315 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-    type: 3}
-  m_PrefabInstance: {fileID: 4720802090889740688}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2049938605215809312 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-    type: 3}
-  m_PrefabInstance: {fileID: 4720802090889740688}
-  m_PrefabAsset: {fileID: 0}

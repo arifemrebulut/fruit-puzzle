@@ -124,12 +124,17 @@ public class FruitMovement : MonoBehaviour
         while (elapsedTime < flipDuration)
         {
             elapsedTime += Time.deltaTime;
-            transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
-            yield return null;
+            if (elapsedTime < flipDuration)
+            {
+                transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
+                yield return null;
+            }
+            else
+            {
+                transform.rotation = endRotation;
+                transform.position = endPosition;
+            }
         }
-
-        transform.rotation = endRotation;
-        transform.position = endPosition;
 
         isFlipping = false;
     }

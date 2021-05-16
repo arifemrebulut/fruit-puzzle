@@ -817,11 +817,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Board
       objectReference: {fileID: 0}
-    - target: {fileID: 7630247008364430344, guid: f800bfb01a7dcde4496ae0bc323e66d4,
-        type: 3}
-      propertyPath: m_Name
-      value: ChocolateSplashEffct
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f800bfb01a7dcde4496ae0bc323e66d4, type: 3}
 --- !u!1001 &1854643776
@@ -1038,15 +1033,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1150117904, guid: 22bc0712023f804419f1c7363a5a81a0, type: 3}
-      propertyPath: raycastPositionYOffset
-      value: 0.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 520526948208165831, guid: 22bc0712023f804419f1c7363a5a81a0,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 970205665902809417, guid: 22bc0712023f804419f1c7363a5a81a0,
         type: 3}
       propertyPath: m_Name
@@ -1105,11 +1091,6 @@ PrefabInstance:
     - target: {fileID: 4264210868841194330, guid: 22bc0712023f804419f1c7363a5a81a0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269443811874977413, guid: 22bc0712023f804419f1c7363a5a81a0,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
