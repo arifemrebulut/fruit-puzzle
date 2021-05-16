@@ -20,6 +20,11 @@ public class FruitAnimations : MonoBehaviour
     [SerializeField] float levelCompleteYMoveDuration, levelCompleteSpinDuration;
     [SerializeField] Vector3 levelCompleteScaleAmount;
 
+    [Header("Fruit Out From Scene Aniation")]
+    [SerializeField] Vector3 targetPosition;
+    [SerializeField] float targetYValue;
+    [SerializeField] float outFromSceneAnimationDuration;
+
     #endregion
 
     #region Subscribing and Unsubscribing to events for Playing Animations
@@ -91,8 +96,12 @@ public class FruitAnimations : MonoBehaviour
             levelCompleteYMoveDuration).OnComplete(EventBroker.CallOnLevelComplete).SetEase(Ease.OutQuad)).SetDelay(0.5f);
 
         sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), levelCompleteSpinDuration, RotateMode.LocalAxisAdd));
+        sequence.Join(transform.DOScale(transform.localScale + levelCompleteScaleAmount, levelCompleteSpinDuration / 4).SetLoops(4, LoopType.Yoyo));
 
-        sequence.Join(transform.DOScale(transform.localScale + levelCompleteScaleAmount, levelCompleteSpinDuration / 4)
-            .SetLoops(4, LoopType.Yoyo));
+        sequence.AppendInterval(1.3f);
+
+        sequence.Append(transform.DOMove(targetPosition, outFromSceneAnimationDuration));
+        sequence.Join(transform.DORotate(new Vector3(0f, targetYValue, 0f), outFromSceneAnimationDuration));
+
     }
 }
