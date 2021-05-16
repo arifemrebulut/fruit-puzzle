@@ -10,8 +10,6 @@ public class EventBroker
 
     public static void CallOnJump()
     {
-        Debug.Log("JumpCalled");
-
         if (OnJump != null)
         {
             OnJump();

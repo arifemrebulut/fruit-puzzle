@@ -4,18 +4,20 @@ using UnityEngine;
 public class FruitMovement : MonoBehaviour
 {
     [SerializeField] float movementDuration;
-    [SerializeField] float flipSpeed;
+    [SerializeField] float flipDuration;
     [SerializeField] float swipeDelta;
 
     private bool isTouching, isMoving, isFlipping, isCantJumping;
 
     private Vector3 touchStartPosition;
+    private float defaultYPosition;
 
     FruitGridCheck fruitGridCheck;
 
     private void Start()
     {
         fruitGridCheck = GetComponent<FruitGridCheck>();
+        defaultYPosition = transform.position.y;
     }
 
     void Update()
@@ -85,20 +87,12 @@ public class FruitMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator CantMove(Vector3 direction)
-    {
-        isCantJumping = true;
-        EventBroker.CallOnCantJump(direction);
-        yield return new WaitForSecondsRealtime(0.5f);
-        isCantJumping = false;
-    }
-
     private IEnumerator MoveFruit(Vector3 direction)
     {
+        EventBroker.CallOnJump();
+
         float elapsedTime = 0f;
         Vector3 targetPosition = transform.position + direction;
-
-        EventBroker.CallOnJump();
 
         while (elapsedTime < movementDuration)
         {
@@ -113,6 +107,8 @@ public class FruitMovement : MonoBehaviour
 
     private IEnumerator FlipFruit(Vector3 flipDirection)
     {
+        EventBroker.CallOnFlipping();
+
         Vector3 rotAxis = Vector3.Cross(Vector3.up, flipDirection);
         Vector3 pivot = (transform.position + Vector3.down * 0.5f) + flipDirection * 0.5f;
 
@@ -120,14 +116,12 @@ public class FruitMovement : MonoBehaviour
         Quaternion endRotation = Quaternion.AngleAxis(90.0f, rotAxis) * startRotation;
 
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = transform.position + flipDirection;
+        Vector3 endPosition = new Vector3(transform.position.x, defaultYPosition, transform.position.z) + flipDirection;
 
-        float rotSpeed = 90.0f / flipSpeed;
+        float rotSpeed = 90.0f / flipDuration;
         float elapsedTime = 0f;
 
-        EventBroker.CallOnFlipping();
-
-        while (elapsedTime < flipSpeed)
+        while (elapsedTime < flipDuration)
         {
             elapsedTime += Time.deltaTime;
             transform.RotateAround(pivot, rotAxis, rotSpeed * Time.deltaTime);
@@ -138,5 +132,13 @@ public class FruitMovement : MonoBehaviour
         transform.position = endPosition;
 
         isFlipping = false;
+    }
+
+    private IEnumerator CantMove(Vector3 direction)
+    {
+        isCantJumping = true;
+        EventBroker.CallOnCantJump(direction);
+        yield return new WaitForSecondsRealtime(0.5f);
+        isCantJumping = false;
     }
 }

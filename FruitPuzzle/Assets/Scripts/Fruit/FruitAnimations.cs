@@ -5,19 +5,19 @@ using DG.Tweening;
 public class FruitAnimations : MonoBehaviour
 {
     [Header("Jump Animations")]
-    [Space(20)]
+    [Space(7)]
     [SerializeField] float jumpScaleAnimationDuration;
     [SerializeField] float jumpMoveAnimatiomDuration;
     [SerializeField] float jumpYMoveValue, jumpYScaleValue, jumpXScaleValue;
 
     [Header("Cant Jump Animations")]
-    [Space(20)]
+    [Space(7)]
     [SerializeField] float cantJumpAnimationDuration;
     [SerializeField] float cantJumpXMoveValue, cantJumpYMoveValue, cantJumpZMoveValue;
     [SerializeField] float cantJumpRotationAmount;
 
     [Header("Fruit Complete Animations")]
-    [Space(20)]
+    [Space(7)]
     [SerializeField] float fruitCompleteYMoveValue;
     [SerializeField] float fruitCompleteYMoveDuration, fruitCompleteSpinDuration;
     [SerializeField] Vector3 fruitCompleteScaleAmount;
@@ -89,10 +89,11 @@ public class FruitAnimations : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOMoveY((transform.position + new Vector3(0f, fruitCompleteYMoveValue, 0f)).y,
-            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad));
+        sequence.Append(transform.DOMoveY(transform.position.y + fruitCompleteYMoveValue,
+            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad)).SetDelay(0.5f);
 
-        sequence.Append(transform.DORotate((transform.localEulerAngles + new Vector3(0f, 0f, 270f)),
-            fruitCompleteSpinDuration, RotateMode.Fast).SetLoops(2, LoopType.Incremental));
+        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 720f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd));
+
+        sequence.Join(transform.DOScale(transform.localScale + fruitCompleteScaleAmount, fruitCompleteSpinDuration / 4).SetLoops(4, LoopType.Yoyo));
     }
 }

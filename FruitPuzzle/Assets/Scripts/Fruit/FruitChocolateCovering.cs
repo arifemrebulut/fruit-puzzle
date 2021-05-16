@@ -12,17 +12,16 @@ public class FruitChocolateCovering : MonoBehaviour
 
     private List<bool> surfacesToCover;
 
-    private bool isGameRunning;
+    private bool isFullCovered;
 
     private void Awake()
     {
         surfacesToCover = new List<bool>() { isTopCovered, isBottomCovered, isLeftCovered, isRightCovered };
-        isGameRunning = true;
     }
 
     void Update()
     {
-        if (isGameRunning)
+        if (!isFullCovered)
         {
             if (Physics.Raycast(transform.position, transform.up, raycastLength, chocolateGridLayer))
             {
@@ -54,7 +53,7 @@ public class FruitChocolateCovering : MonoBehaviour
         if (surfacesToCover.All(x => x == true))
         {
             EventBroker.CallOnFruitComplete();
-            isGameRunning = false;
+            isFullCovered = true; ;
         }
     }
 }

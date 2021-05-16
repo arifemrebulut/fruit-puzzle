@@ -383,20 +383,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce161b83174c0441811d4ae86b6af3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpScaleAnimationDuration: 0.15
+  jumpScaleAnimationDuration: 0.11
   jumpMoveAnimatiomDuration: 0.11
-  jumpYMoveValue: -0.2
-  jumpYScaleValue: 0.9
-  jumpXScaleValue: 1.1
+  jumpYMoveValue: 0.4
+  jumpYScaleValue: -0.1
+  jumpXScaleValue: 0.1
   cantJumpAnimationDuration: 0.15
   cantJumpXMoveValue: 0.3
   cantJumpYMoveValue: 0.3
   cantJumpZMoveValue: 0.3
   cantJumpRotationAmount: 30
-  fruitCompleteYMoveValue: 1
-  fruitCompleteYMoveDuration: 0.2
+  fruitCompleteYMoveValue: 1.2
+  fruitCompleteYMoveDuration: 0.7
   fruitCompleteSpinDuration: 1
-  fruitCompleteScaleAmount: {x: 0, y: 0, z: 0}
+  fruitCompleteScaleAmount: {x: 0.3, y: 0.3, z: 0.3}
   fruitCompleteParticleEffects: []
 --- !u!1001 &1643238233
 PrefabInstance:
@@ -690,6 +690,11 @@ PrefabInstance:
         type: 3}
       propertyPath: movementDuration
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 970205665902809415, guid: 22bc0712023f804419f1c7363a5a81a0,
+        type: 3}
+      propertyPath: flipDuration
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 970205665902809417, guid: 22bc0712023f804419f1c7363a5a81a0,
         type: 3}
