@@ -56,14 +56,14 @@ public class FruitChocolateCovering : MonoBehaviour
     {
         if (coveredSurfaces.All(x => x == true))
         {
-            EventBroker.CallOnLevelComplete();
+            EventBroker.OnFruitFullCovered();
             isFullCovered = true;
         }
     }
 
     public void FinishLevel()
     {
-        EventBroker.CallOnLevelComplete();
+        EventBroker.OnFruitFullCovered();
         isFullCovered = true;
     }
 }

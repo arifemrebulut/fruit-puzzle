@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bdbcba68dbce0f34cb71af90646fffc1
+guid: 2e3cac024ed937b409f1c1c7397de3bc
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Rockin Record__G
+  fontName: Rockin' Record
   fontNames:
-  - Rockin Record__G
+  - Rockin' Record
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
