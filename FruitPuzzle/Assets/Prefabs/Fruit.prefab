@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &395470125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395470126}
+  m_Layer: 0
+  m_Name: ParticleEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395470126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395470125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 920376428615758691}
+  - {fileID: 8746121788071789478}
+  m_Father: {fileID: 4264210868841194330}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817832360
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,11 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3d0d96d620f7244b74221e7dff556e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chocolateSpash: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-    type: 3}
-  chocolateTrace: {fileID: 2906178698161734205, guid: 52906a27243dbc94bbb491a3e5e3a499,
-    type: 3}
-  particleOffset: {x: -0.2, y: 0, z: 0}
+  side: 3
+  chocolateSpash: {fileID: 920376428615758688}
+  chocolateTrace: {fileID: 8746121788071789476}
+  particleOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &970205665902809417
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +240,7 @@ Transform:
   m_Children:
   - {fileID: 4264210868453326466}
   - {fileID: 1817832361}
+  - {fileID: 395470126}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -287,7 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f95ae4fba9bff499fb2450af340d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementDuration: 0.2
+  movementDuration: 0.5
+  movementSpeed: 7
   flipDuration: 0.2
   swipeDelta: 80
 --- !u!114 &1150117904
@@ -339,12 +372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce161b83174c0441811d4ae86b6af3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpScaleAnimationDuration: 0.2
-  jumpMoveAnimatiomDuration: 0.2
-  jumpYMoveValue: 0.4
-  jumpYScaleValue: -0.1
-  jumpXScaleValue: 0.1
-  cantJumpAnimationDuration: 0.15
+  jumpScaleDuration: 0.16
+  jumpMoveDuration: 0.15
+  jumpYMoveValue: 0.5
+  jumpYScaleValue: -0.21
+  jumpXScaleValue: 0.21
+  cantJumpAnimationDuration: 0.2
   cantJumpXMoveValue: 0.3
   cantJumpYMoveValue: 0.3
   cantJumpZMoveValue: 0.3
@@ -353,7 +386,9 @@ MonoBehaviour:
   levelCompleteYMoveDuration: 0.6
   levelCompleteSpinDuration: 0.8
   levelCompleteScaleAmount: {x: 0.2, y: 0.2, z: 0.2}
-  levelCompleteParticleEffects: []
+  targetPosition: {x: 8, y: -0.6, z: -4}
+  targetYValue: -90
+  outFromSceneAnimationDuration: 1.5
 --- !u!1 &970205666286488721
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,11 +478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3d0d96d620f7244b74221e7dff556e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chocolateSpash: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-    type: 3}
-  chocolateTrace: {fileID: 2906178698161734205, guid: 52906a27243dbc94bbb491a3e5e3a499,
-    type: 3}
-  particleOffset: {x: 0, y: 0.2, z: 0}
+  side: 0
+  chocolateSpash: {fileID: 920376428615758688}
+  chocolateTrace: {fileID: 8746121788071789476}
+  particleOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &4632902500249841226
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,11 +923,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3d0d96d620f7244b74221e7dff556e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chocolateSpash: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
-    type: 3}
-  chocolateTrace: {fileID: 2906178698161734205, guid: 52906a27243dbc94bbb491a3e5e3a499,
-    type: 3}
-  particleOffset: {x: 0.2, y: 0, z: 0}
+  side: 2
+  chocolateSpash: {fileID: 920376428615758688}
+  chocolateTrace: {fileID: 8746121788071789476}
+  particleOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &7886520206544780023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,8 +1063,174 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3d0d96d620f7244b74221e7dff556e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chocolateSpash: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+  side: 1
+  chocolateSpash: {fileID: 920376428615758688}
+  chocolateTrace: {fileID: 8746121788071789476}
+  particleOffset: {x: 0, y: 0.1, z: 0}
+--- !u!1001 &5851483569111564697
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 395470126}
+    m_Modifications:
+    - target: {fileID: 2906178698161734206, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_Name
+      value: ChocolateTraceParticleEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 52906a27243dbc94bbb491a3e5e3a499, type: 3}
+--- !u!4 &8746121788071789478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2906178698161734207, guid: 52906a27243dbc94bbb491a3e5e3a499,
     type: 3}
-  chocolateTrace: {fileID: 2906178698161734205, guid: 52906a27243dbc94bbb491a3e5e3a499,
+  m_PrefabInstance: {fileID: 5851483569111564697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8746121788071789476 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2906178698161734205, guid: 52906a27243dbc94bbb491a3e5e3a499,
     type: 3}
-  particleOffset: {x: 0, y: 0.2, z: 0}
+  m_PrefabInstance: {fileID: 5851483569111564697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5851483569248013776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 395470126}
+    m_Modifications:
+    - target: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769315072907476670, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+        type: 3}
+      propertyPath: m_Name
+      value: ChocolateSplashParticleEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6b5fe9ec1807f614a8266436d1d5b342, type: 3}
+--- !u!4 &920376428615758691 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6769315072907476659, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+    type: 3}
+  m_PrefabInstance: {fileID: 5851483569248013776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &920376428615758688 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6769315072907476656, guid: 6b5fe9ec1807f614a8266436d1d5b342,
+    type: 3}
+  m_PrefabInstance: {fileID: 5851483569248013776}
+  m_PrefabAsset: {fileID: 0}

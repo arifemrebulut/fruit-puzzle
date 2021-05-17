@@ -15,12 +15,12 @@ public class FruitAnimations : MonoBehaviour
     [SerializeField] float cantJumpXMoveValue, cantJumpYMoveValue, cantJumpZMoveValue;
     [SerializeField] float cantJumpRotationAmount;
 
-    [Header("Level Complete Animations")]
-    [SerializeField] float levelCompleteYMoveValue;
-    [SerializeField] float levelCompleteYMoveDuration, levelCompleteSpinDuration;
-    [SerializeField] Vector3 levelCompleteScaleAmount;
+    [Header("Fruit Complete Animations")]
+    [SerializeField] float fruitCompleteYMoveValue;
+    [SerializeField] float fruitCompleteYMoveDuration, fruitCompleteSpinDuration;
+    [SerializeField] Vector3 fruitCompleteScaleAmount;
 
-    [Header("Fruit Out From Scene Aniation")]
+    [Header("Fruit Out From Scene Animation")]
     [SerializeField] Vector3 targetPosition;
     [SerializeField] float targetYValue;
     [SerializeField] float outFromSceneAnimationDuration;
@@ -33,7 +33,7 @@ public class FruitAnimations : MonoBehaviour
         EventBroker.OnJump += PlayJumpAnimations;
         EventBroker.OnCantJump += PlayCantJumpAnimations;
         EventBroker.OnFlipping += PlayFlippingAnimations;
-        EventBroker.OnFruitFullCovered += PlayFruitFullCoveredAnimations;
+        EventBroker.OnFruitComplete += PlayFruitCompleteAnimations;
     }
 
     private void OnDisable()
@@ -41,7 +41,7 @@ public class FruitAnimations : MonoBehaviour
         EventBroker.OnJump -= PlayJumpAnimations;
         EventBroker.OnCantJump -= PlayCantJumpAnimations;
         EventBroker.OnFlipping -= PlayFlippingAnimations;
-        EventBroker.OnFruitFullCovered -= PlayFruitFullCoveredAnimations;
+        EventBroker.OnFruitComplete -= PlayFruitCompleteAnimations;
     }
     #endregion
 
@@ -88,20 +88,19 @@ public class FruitAnimations : MonoBehaviour
         transform.DOScaleX(transform.localScale.x + jumpXScaleValue, jumpScaleDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad);
     }
 
-    private void PlayFruitFullCoveredAnimations()
+    private void PlayFruitCompleteAnimations()
     {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOMoveY(transform.position.y + levelCompleteYMoveValue,
-            levelCompleteYMoveDuration).OnComplete(EventBroker.CallOnFruitComplete).SetEase(Ease.OutQuad).SetDelay(0.5f));       
+        sequence.Append(transform.DOMoveY(transform.position.y + fruitCompleteYMoveValue,
+            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad).SetDelay(0.5f));       
 
-        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), levelCompleteSpinDuration, RotateMode.LocalAxisAdd));
-        sequence.Join(transform.DOScale(transform.localScale + levelCompleteScaleAmount, levelCompleteSpinDuration / 4)
+        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd));
+        sequence.Join(transform.DOScale(transform.localScale + fruitCompleteScaleAmount, fruitCompleteSpinDuration / 4)
             .SetLoops(4, LoopType.Yoyo).SetEase(Ease.OutQuad));
 
         sequence.AppendInterval(0.5f);
-        sequence.Append(transform.DOMove(targetPosition, outFromSceneAnimationDuration).OnPlay(EventBroker.CallOnLevelScene));
-        sequence.Join(transform.DORotate(new Vector3(0f, targetYValue, 0f), outFromSceneAnimationDuration));
-        
+        sequence.Append(transform.DOMove(targetPosition, outFromSceneAnimationDuration));
+        sequence.Join(transform.DORotate(new Vector3(0f, targetYValue, 0f), outFromSceneAnimationDuration));    
     }
 }

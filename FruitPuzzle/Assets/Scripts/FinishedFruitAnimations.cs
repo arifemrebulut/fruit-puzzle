@@ -47,7 +47,7 @@ public class FinishedFruitAnimations : MonoBehaviour
         sequence.Join(transform.DOScale(scaleAmount, scaleDuration).SetLoops(4, LoopType.Yoyo));
 
         sequence.Append(transform.DOMoveY(0f, yMoveDuration * 3).SetEase(Ease.OutQuad)
-            .OnStart(EventBroker.CallOnFruitComplete));
+            .OnStart(EventBroker.CallOnLevelPassed));
 
         sequence.Join(transform.DORotate(new Vector3(0f, slowRotationAmount / 2, 0f),
             slowRotationDuration * 4, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));

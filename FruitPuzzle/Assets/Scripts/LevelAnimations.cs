@@ -7,10 +7,10 @@ public class LevelAnimations : MonoBehaviour
 {
     #region Animation Fields
 
-    [Header("Level Complete Animations")]
+    [Header("Fruit Complete Animations")]
     [SerializeField] TextMeshProUGUI greatText;
     [SerializeField] float greatTextAnimationDuration;
-    [SerializeField] List<ParticleSystem> levelCompleteParticleEffects;
+    [SerializeField] List<ParticleSystem> fruitCompleteParticleEffects;
 
     [Header("Camera Animations")]
     [SerializeField] Camera camera;
@@ -68,11 +68,11 @@ public class LevelAnimations : MonoBehaviour
 
         sequence.Append(greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce)
             .OnComplete(PlayCameraOnFruitCompleteAnimation));
-        sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration).SetEase(Ease.OutBounce).SetDelay(2));
+        sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration).SetEase(Ease.OutBounce).SetDelay(0.5f));
 
-        for (int i = 0; i < levelCompleteParticleEffects.Count; i++)
+        for (int i = 0; i < fruitCompleteParticleEffects.Count; i++)
         {
-            ParticleSystem effect = Instantiate(levelCompleteParticleEffects[i], fruitPosition, transform.rotation);
+            ParticleSystem effect = Instantiate(fruitCompleteParticleEffects[i], fruitPosition, Quaternion.identity);
         }
 
         GameManager.SwitchCurrentLevelStat(LevelStats.OnFinalWinScene);
