@@ -4,6 +4,7 @@ using UnityEngine;
 public class FruitMovement : MonoBehaviour
 {
     [SerializeField] float movementDuration;
+    [SerializeField] float movementSpeed;
     [SerializeField] float flipDuration;
     [SerializeField] float swipeDelta;
 
@@ -36,6 +37,7 @@ public class FruitMovement : MonoBehaviour
                 {
                     isTouching = false;
                     isMoving = true;
+                    EventBroker.CallOnJump();
                     StartCoroutine(MoveFruit(Vector3.forward));
                 }
                 else
@@ -50,6 +52,7 @@ public class FruitMovement : MonoBehaviour
                 {
                     isTouching = false;
                     isMoving = true;
+                    EventBroker.CallOnJump();
                     StartCoroutine(MoveFruit(Vector3.back));
                 }
                 else
@@ -88,15 +91,14 @@ public class FruitMovement : MonoBehaviour
     }
 
     private IEnumerator MoveFruit(Vector3 direction)
-    {
-        EventBroker.CallOnJump();
+    {       
 
         float elapsedTime = 0f;
         Vector3 targetPosition = transform.position + direction;
 
         while (elapsedTime < movementDuration)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementDuration);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

@@ -8,7 +8,7 @@ public class FruitChocolateCovering : MonoBehaviour
     [SerializeField] LayerMask chocolateGridLayer;
     [SerializeField] float raycastLength;
 
-    private bool isTopCovered, isBottomCovered, isLeftCovered, isRightCovered;
+    public static bool isTopCovered, isBottomCovered, isLeftCovered, isRightCovered;
 
     private List<bool> coveredSurfaces;
 

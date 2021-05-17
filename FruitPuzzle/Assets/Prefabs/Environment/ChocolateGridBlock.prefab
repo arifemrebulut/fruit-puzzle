@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9d4f3d64ce360d641be6819f5ddb7553, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89,7 +89,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7345346261366939132}
   - component: {fileID: -3707914805883954116}
-  - component: {fileID: 4015278545582549459}
   m_Layer: 8
   m_Name: ChocolateGridBlock
   m_TagString: ChocolateGridBlock
@@ -126,20 +125,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.2, z: 0.5}
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &4015278545582549459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2274760488822079426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b3e35ddfef5bc428298f5addb79ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chocolateSplash: {fileID: 0}
-  emitAmount: 200
 --- !u!1 &3615851276346814087
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +151,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3615851276346814087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.607, z: 0}
-  m_LocalScale: {x: 1.0187238, y: 1.0187238, z: 1.0187238}
+  m_LocalPosition: {x: 0, y: 0.595, z: 0}
+  m_LocalScale: {x: 1.04, y: 1, z: 1.04}
   m_Children: []
   m_Father: {fileID: 7345346261366939132}
   m_RootOrder: 0

@@ -6,8 +6,8 @@ public class FruitAnimations : MonoBehaviour
     #region Animation Fields
 
     [Header("Jump Animations")]
-    [SerializeField] float jumpScaleAnimationDuration;
-    [SerializeField] float jumpMoveAnimatiomDuration;
+    [SerializeField] float jumpScaleDuration;
+    [SerializeField] float jumpMoveDuration;
     [SerializeField] float jumpYMoveValue, jumpYScaleValue, jumpXScaleValue;
 
     [Header("Cant Jump Animations")]
@@ -47,7 +47,7 @@ public class FruitAnimations : MonoBehaviour
 
     private void PlayJumpAnimations()
     {
-        transform.DOMoveY(transform.position.y + jumpYMoveValue, jumpMoveAnimatiomDuration).SetLoops(2, LoopType.Yoyo);
+        transform.DOMoveY(transform.position.y + jumpYMoveValue, jumpMoveDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad);
         JumpScaleAnimation();
     }
 
@@ -84,8 +84,8 @@ public class FruitAnimations : MonoBehaviour
 
     private void JumpScaleAnimation()
     {
-        transform.DOScaleY(transform.localScale.y + jumpYScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuint);
-        transform.DOScaleX(transform.localScale.x + jumpXScaleValue, jumpScaleAnimationDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuint);
+        transform.DOScaleY(transform.localScale.y + jumpYScaleValue, jumpScaleDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad);
+        transform.DOScaleX(transform.localScale.x + jumpXScaleValue, jumpScaleDuration).SetLoops(2, LoopType.Yoyo).SetEase(Ease.OutQuad);
     }
 
     private void PlayFruitFullCoveredAnimations()
