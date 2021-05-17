@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class FinishedFruitAnimations : MonoBehaviour
 {
+    #region Animation Fields
+
     [SerializeField] float slowRotationAmount, slowRotationDuration;
     [SerializeField] float fastRotationAmount, fastRotationDuration;
     [SerializeField] float yMoveValue, yMoveDuration;
@@ -15,6 +17,8 @@ public class FinishedFruitAnimations : MonoBehaviour
     [SerializeField] float sugarCreationDuration;
     [SerializeField] List<GameObject> sugarParticles;
     [SerializeField] Transform sugarParticleTransform;
+
+    #endregion
 
     #region Subscribing and Unsubcribing to events for play animations;
 
