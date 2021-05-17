@@ -28,7 +28,7 @@ public class FruitMovement : MonoBehaviour
             isTouching = true;
         }
 
-        if (isTouching && Input.touchCount > 0 && LevelManager.currentLevelStat == LevelStats.OnPlay)
+        if (isTouching && Input.touchCount > 0 && GameManager.currentLevelStat == LevelStats.OnPlay)
         {
             if (Input.GetTouch(0).position.y >= touchStartPosition.y + swipeDelta)
             {
