@@ -31,13 +31,15 @@ public class LevelAnimations : MonoBehaviour
     private void OnEnable()
     {
         EventBroker.OnLevelStart += PlayCameraStartLevelAnimation;
-        EventBroker.OnFruitComplete += PlayLevelCompleteAnimations;
+        EventBroker.OnFruitComplete += PlayFruitCompleteAnimations;
+        EventBroker.OnLevelPassed += PlayLevelPassedAnimations;
     }
 
     private void OnDisable()
     {
         EventBroker.OnLevelStart -= PlayCameraStartLevelAnimation;
-        EventBroker.OnFruitComplete -= PlayLevelCompleteAnimations;
+        EventBroker.OnFruitComplete -= PlayFruitCompleteAnimations;
+        EventBroker.OnLevelPassed -= PlayLevelPassedAnimations;
     }
 
     #endregion
@@ -58,7 +60,7 @@ public class LevelAnimations : MonoBehaviour
         sequence.Join(camera.transform.DORotate(cameraFinishTargetRotation, cameraAnimationsDuration));
     }
 
-    private void PlayLevelCompleteAnimations()
+    private void PlayFruitCompleteAnimations()
     {
         fruitPosition = FindObjectOfType<FruitMovement>().transform.position;
 
@@ -74,5 +76,11 @@ public class LevelAnimations : MonoBehaviour
         }
 
         GameManager.SwitchCurrentLevelStat(LevelStats.OnFinalWinScene);
+    }
+ 
+    private void PlayLevelPassedAnimations()
+    {
+        Debug.Log("CLOUD");
+        Debug.Log("CONFETTI");
     }
 }
