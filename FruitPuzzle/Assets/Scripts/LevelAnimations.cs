@@ -31,15 +31,13 @@ public class LevelAnimations : MonoBehaviour
     private void OnEnable()
     {
         EventBroker.OnLevelStart += PlayCameraStartLevelAnimation;
-        EventBroker.OnLevelComplete += PlayLevelCompleteAnimations;
-        EventBroker.OnFinalWinScene += PlayCameraFinalWinSceneAnimation;
+        EventBroker.OnFruitComplete += PlayLevelCompleteAnimations;
     }
 
     private void OnDisable()
     {
         EventBroker.OnLevelStart -= PlayCameraStartLevelAnimation;
-        EventBroker.OnLevelComplete -= PlayLevelCompleteAnimations;
-        EventBroker.OnFinalWinScene -= PlayCameraFinalWinSceneAnimation;
+        EventBroker.OnFruitComplete -= PlayLevelCompleteAnimations;
     }
 
     #endregion
@@ -52,7 +50,7 @@ public class LevelAnimations : MonoBehaviour
         sequence.Join(camera.transform.DORotate(cameraStartTargetRotation, cameraAnimationsDuration)).SetDelay(0.5f);
     }
 
-    private void PlayCameraFinalWinSceneAnimation()
+    private void PlayCameraOnFruitCompleteAnimation()
     {
         Sequence sequence = DOTween.Sequence();
 
@@ -66,7 +64,8 @@ public class LevelAnimations : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce));
+        sequence.Append(greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce)
+            .OnComplete(PlayCameraOnFruitCompleteAnimation));
         sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration).SetEase(Ease.OutBounce).SetDelay(2));
 
         for (int i = 0; i < levelCompleteParticleEffects.Count; i++)

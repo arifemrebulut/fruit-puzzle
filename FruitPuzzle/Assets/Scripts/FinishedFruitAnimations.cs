@@ -13,12 +13,12 @@ public class FinishedFruitAnimations : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBroker.OnFinalWinScene += PlayFinishedFruidAnimations;
+        EventBroker.OnLevelPassed += PlayFinishedFruidAnimations;
     }
 
     private void OnDisable()
     {
-        EventBroker.OnFinalWinScene -= PlayFinishedFruidAnimations;
+        EventBroker.OnLevelPassed -= PlayFinishedFruidAnimations;
     }
 
     #endregion
@@ -30,19 +30,17 @@ public class FinishedFruitAnimations : MonoBehaviour
         sequence.Append(transform.DORotate(new Vector3(0f, slowRotationAmount, 0f),
             slowRotationDuration, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
 
-        sequence.Append(transform.DOMoveY(yMoveValue, yMoveDuration).SetEase(Ease.OutQuad));
+        sequence.Append(transform.DOMoveY(yMoveValue, yMoveDuration));
 
-        sequence.Join(transform.DORotate(new Vector3(0f, slowRotationAmount, 0f),
-            slowRotationDuration, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
-
-        sequence.Append(transform.DORotate(new Vector3(0f, fastRotationAmount, 0f),
+        sequence.Join(transform.DORotate(new Vector3(0f, fastRotationAmount, 0f),
             fastRotationDuration, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic));
 
-        sequence.Join(transform.DOScale(scaleAmount, scaleDuration).SetLoops(4, LoopType.Yoyo));
+        sequence.Join(transform.DOScale(scaleAmount, scaleDuration).SetLoops(4, LoopType.Yoyo)
+            .OnComplete(EventBroker.CallOnFruitComplete));
 
-        sequence.Append(transform.DOMoveY(0f, yMoveDuration * 2).SetEase(Ease.OutQuad));
+        sequence.Append(transform.DOMoveY(0f, yMoveDuration * 3).SetEase(Ease.OutQuad));
 
         sequence.Join(transform.DORotate(new Vector3(0f, slowRotationAmount / 2, 0f),
-            slowRotationDuration * 2, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
+            slowRotationDuration * 4, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
     }
 }

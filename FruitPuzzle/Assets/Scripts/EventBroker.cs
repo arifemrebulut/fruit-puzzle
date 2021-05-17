@@ -8,8 +8,8 @@ public class EventBroker
     public static Action OnFlipping;
     public static Action OnFruitFullCovered;
     public static Action OnLevelStart;
-    public static Action OnLevelComplete;
-    public static Action OnFinalWinScene;
+    public static Action OnFruitComplete;
+    public static Action OnLevelPassed;
 
     public static void CallOnJump()
     {
@@ -51,19 +51,19 @@ public class EventBroker
         }
     }
 
-    public static void CallOnLevelComplete()
+    public static void CallOnFruitComplete()
     {
-        if (OnLevelComplete != null)
+        if (OnFruitComplete != null)
         {
-            OnLevelComplete();
+            OnFruitComplete();
         }
     }
 
-    public static void CallOnFinalWinScene()
+    public static void CallOnLevelScene()
     {
-        if (OnFinalWinScene != null)
+        if (OnLevelPassed != null)
         {
-            OnFinalWinScene();
+            OnLevelPassed();
         }
     }
 }
