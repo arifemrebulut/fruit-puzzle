@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2331345351617690079}
   - component: {fileID: 6566069361160759406}
   m_Layer: 0
-  m_Name: Cube.020
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0cbd7b1af1d4b409e98bb69546f0a063, type: 2}
+  - {fileID: 2100000, guid: 39553e559f32d42499777014250c43dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 8232580392995908565}
   - component: {fileID: 2640333835497431022}
   m_Layer: 0
-  m_Name: Cube.021
+  m_Name: Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,7 +653,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0cbd7b1af1d4b409e98bb69546f0a063, type: 2}
+  - {fileID: 2100000, guid: 4c1ca1ef53aad10428f57552f6bc1dd0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

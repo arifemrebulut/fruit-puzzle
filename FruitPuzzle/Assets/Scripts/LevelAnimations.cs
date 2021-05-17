@@ -87,15 +87,16 @@ public class LevelAnimations : MonoBehaviour
  
     private void PlayLevelPassedAnimations()
     {
-        finishedFruitPosition = FindObjectOfType<FinishedFruitAnimations>().transform.position;
-
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(levelPassedText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), levelPassedTextAnimationDuration).SetEase(Ease.OutQuad));
 
+        finishedFruitPosition = FindObjectOfType<FinishedFruitAnimations>().transform.position;
+
         for (int i = 0; i < levelPassedParticleEffects.Count; i++)
         {
-            ParticleSystem effect = Instantiate(levelPassedParticleEffects[i], finishedFruitPosition, Quaternion.identity);
+            
+            ParticleSystem effect = Instantiate(levelPassedParticleEffects[i], finishedFruitPosition + new Vector3(0f, 2f, 0f), Quaternion.identity);
         }
     }
 }
