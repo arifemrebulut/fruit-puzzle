@@ -382,10 +382,10 @@ MonoBehaviour:
   cantJumpYMoveValue: 0.3
   cantJumpZMoveValue: 0.3
   cantJumpRotationAmount: 30
-  levelCompleteYMoveValue: 1
-  levelCompleteYMoveDuration: 0.6
-  levelCompleteSpinDuration: 0.8
-  levelCompleteScaleAmount: {x: 0.2, y: 0.2, z: 0.2}
+  fruitCompleteYMoveValue: 1
+  fruitCompleteYMoveDuration: 0.5
+  fruitCompleteSpinDuration: 0.5
+  fruitCompleteScaleAmount: {x: 0.2, y: 0.2, z: 0.2}
   targetPosition: {x: 8, y: -0.6, z: -4}
   targetYValue: -90
   outFromSceneAnimationDuration: 1.5

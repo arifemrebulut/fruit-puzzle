@@ -7,7 +7,9 @@ public class EventBroker
     public static Action<Vector3> OnCantJump;
     public static Action OnFlipping;
     public static Action OnLevelStart;
+    public static Action OnFruitRiseEnd;
     public static Action OnFruitComplete;
+    public static Action OnFinishedFruitScene;
     public static Action OnLevelPassed;
 
     public static void CallOnJump()
@@ -47,6 +49,22 @@ public class EventBroker
         if (OnFruitComplete != null)
         {
             OnFruitComplete();
+        }
+    }
+
+    public static void CallOnFruitRiseEnd()
+    {
+        if (OnFruitRiseEnd != null)
+        {
+            OnFruitRiseEnd();
+        }
+    }
+
+    public static void CallOnFinishedFruitScene()
+    {
+        if (OnFinishedFruitScene != null)
+        {
+            OnFinishedFruitScene();
         }
     }
 

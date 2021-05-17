@@ -93,9 +93,10 @@ public class FruitAnimations : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(transform.DOMoveY(transform.position.y + fruitCompleteYMoveValue,
-            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad).SetDelay(0.5f));       
+            fruitCompleteYMoveDuration).SetEase(Ease.OutQuad).SetDelay(0.5f).OnComplete(EventBroker.CallOnFruitRiseEnd));       
 
-        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd));
+        sequence.Append(transform.DORotate(new Vector3(0f, 0f, 540f), fruitCompleteSpinDuration, RotateMode.LocalAxisAdd)
+            .SetEase(Ease.OutQuad));
         sequence.Join(transform.DOScale(transform.localScale + fruitCompleteScaleAmount, fruitCompleteSpinDuration / 4)
             .SetLoops(4, LoopType.Yoyo).SetEase(Ease.OutQuad));
 

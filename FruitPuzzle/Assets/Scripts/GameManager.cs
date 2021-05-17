@@ -5,7 +5,7 @@ public enum LevelStats
     OnMenu,
     OnPlay,
     OnLevelComplete,
-    OnFinalWinScene
+    OnFinishedFruitScene,
 }
 
 public class GameManager : MonoBehaviour

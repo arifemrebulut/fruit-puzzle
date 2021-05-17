@@ -22,7 +22,13 @@ public class LevelAnimations : MonoBehaviour
     [SerializeField] Vector3 cameraFinishTargetPosition;
     [SerializeField] Vector3 cameraFinishTargetRotation;
 
+    [Header("Level Past Animations")]
+    [SerializeField] TextMeshProUGUI levelPassedText;
+    [SerializeField] List<ParticleSystem> levelPassedParticleEffects;
+    [SerializeField] float levelPassedTextAnimationDuration;
+
     private Vector3 fruitPosition;
+    private Vector3 finishedFruitPosition;
 
     #endregion  
 
@@ -31,7 +37,7 @@ public class LevelAnimations : MonoBehaviour
     private void OnEnable()
     {
         EventBroker.OnLevelStart += PlayCameraStartLevelAnimation;
-        EventBroker.OnFruitComplete += PlayFruitCompleteAnimations;
+        EventBroker.OnFruitRiseEnd += PlayFruitCompleteAnimations;
         EventBroker.OnLevelPassed += PlayLevelPassedAnimations;
     }
 
@@ -56,7 +62,8 @@ public class LevelAnimations : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(camera.transform.DOMove(cameraFinishTargetPosition, cameraAnimationsDuration).SetEase(Ease.OutQuad));
+        sequence.Append(camera.transform.DOMove(cameraFinishTargetPosition, cameraAnimationsDuration).SetEase(Ease.OutQuad)
+            .OnStart(EventBroker.CallOnFinishedFruitScene));
         sequence.Join(camera.transform.DORotate(cameraFinishTargetRotation, cameraAnimationsDuration));
     }
 
@@ -68,19 +75,27 @@ public class LevelAnimations : MonoBehaviour
 
         sequence.Append(greatText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), greatTextAnimationDuration).SetEase(Ease.OutBounce)
             .OnComplete(PlayCameraOnFruitCompleteAnimation));
-        sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration).SetEase(Ease.OutBounce).SetDelay(0.5f));
+        sequence.Append(greatText.rectTransform.DOScale(Vector3.zero, greatTextAnimationDuration / 2).SetEase(Ease.Linear));
 
         for (int i = 0; i < fruitCompleteParticleEffects.Count; i++)
         {
             ParticleSystem effect = Instantiate(fruitCompleteParticleEffects[i], fruitPosition, Quaternion.identity);
         }
 
-        GameManager.SwitchCurrentLevelStat(LevelStats.OnFinalWinScene);
+        GameManager.SwitchCurrentLevelStat(LevelStats.OnFinishedFruitScene);
     }
  
     private void PlayLevelPassedAnimations()
     {
-        Debug.Log("CLOUD");
-        Debug.Log("CONFETTI");
+        finishedFruitPosition = FindObjectOfType<FinishedFruitAnimations>().transform.position;
+
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(levelPassedText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), levelPassedTextAnimationDuration).SetEase(Ease.OutQuad));
+
+        for (int i = 0; i < levelPassedParticleEffects.Count; i++)
+        {
+            ParticleSystem effect = Instantiate(levelPassedParticleEffects[i], finishedFruitPosition, Quaternion.identity);
+        }
     }
 }

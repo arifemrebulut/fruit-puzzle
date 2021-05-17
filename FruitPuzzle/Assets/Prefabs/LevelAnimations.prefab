@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817356451874941402}
-  m_LocalRotation: {x: -0.2661938, y: 0.47046402, z: -0.14975564, w: -0.82787544}
+  m_LocalRotation: {x: 0.26619166, y: -0.4704639, z: 0.14975311, w: 0.8278766}
   m_LocalPosition: {x: 5.68, y: 4.8, z: -12.24}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,13 +45,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greatText: {fileID: 0}
   greatTextAnimationDuration: 1
-  levelCompleteParticleEffects:
-  - {fileID: 5542930615718169999, guid: ac8b243070e839843a10e1b6b3b08a98, type: 3}
-  - {fileID: 3447792991587989318, guid: fbc26c33d20250343b9de753e1b50655, type: 3}
+  fruitCompleteParticleEffects:
   - {fileID: 5542930615718169999, guid: 51d896c778d778848a0b22f5dda0be24, type: 3}
+  - {fileID: 3447792991587989318, guid: fbc26c33d20250343b9de753e1b50655, type: 3}
+  - {fileID: 5542930615718169999, guid: ac8b243070e839843a10e1b6b3b08a98, type: 3}
   camera: {fileID: 0}
   cameraAnimationsDuration: 1
   cameraStartTargetPosition: {x: 6.64, y: 7.82, z: -7.03}
   cameraStartTargetRotation: {x: 38.376, y: -41.425, z: -5.074}
   cameraFinishTargetPosition: {x: 5.68, y: 4.8, z: -12.24}
   cameraFinishTargetRotation: {x: 35.567, y: -59.274, z: -0.177}
+  levelPassedText: {fileID: 0}
+  levelPassedParticleEffects:
+  - {fileID: 6309203069890578215, guid: 9d1b12dec265c1044808281e2d060995, type: 3}
+  - {fileID: 198677243306319532, guid: cfd858b69e847b4468421c2fd8411837, type: 3}
+  levelPassedTextAnimationDuration: 0.5
