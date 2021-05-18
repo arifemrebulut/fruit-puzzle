@@ -3,6 +3,7 @@
 public class FruitGridCheck : MonoBehaviour
 {
     [SerializeField] LayerMask avaibleGridLayers;
+    [SerializeField] LayerMask blockLayer;
     [SerializeField] float raycastLength;
     [SerializeField] float raycastPositionYOffset;
 
@@ -38,7 +39,9 @@ public class FruitGridCheck : MonoBehaviour
     {
         bool canMoveLeft;
 
-        canMoveLeft = Physics.Raycast(leftOrigin, Vector3.left, raycastLength, avaibleGridLayers);
+        canMoveLeft = Physics.Raycast(leftOrigin, Vector3.left, raycastLength, avaibleGridLayers) &&
+            !Physics.Raycast(leftOrigin - new Vector3(0f, 0f, 1f), Vector3.left, raycastLength, blockLayer) &&
+            !Physics.Raycast(leftOrigin - new Vector3(0f, 0f, 2f), Vector3.left, raycastLength, blockLayer);
 
         return canMoveLeft;
     }
@@ -47,7 +50,9 @@ public class FruitGridCheck : MonoBehaviour
     {
         bool canMoveRight;
 
-        canMoveRight = Physics.Raycast(rightOrigin, Vector3.right, raycastLength, avaibleGridLayers);
+        canMoveRight = Physics.Raycast(rightOrigin, Vector3.right, raycastLength, avaibleGridLayers) &&
+            !Physics.Raycast(rightOrigin - new Vector3(0f, 0f, 1f), Vector3.right, raycastLength, blockLayer) &&
+            !Physics.Raycast(rightOrigin - new Vector3(0f, 0f, 2f), Vector3.right, raycastLength, blockLayer);
 
         return canMoveRight;
     }

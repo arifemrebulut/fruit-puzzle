@@ -58,7 +58,6 @@ public class FinishedFruitAnimations : MonoBehaviour
 
     private IEnumerator CreateSugarParticles()
     {
-        yield return new WaitForSeconds(1f);
 
         float elapsedTime = 0f;
 
@@ -78,7 +77,7 @@ public class FinishedFruitAnimations : MonoBehaviour
 
             GameObject sugar = Instantiate(randomSugar, sugarPosition, transform.rotation);
 
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
     }
 }

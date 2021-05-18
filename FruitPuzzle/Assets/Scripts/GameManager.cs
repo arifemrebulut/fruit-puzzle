@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum LevelStats
 {
@@ -21,5 +22,10 @@ public class GameManager : MonoBehaviour
     public static void SwitchCurrentLevelStat(LevelStats desiredLevelStat)
     {
         currentLevelStat = desiredLevelStat;
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

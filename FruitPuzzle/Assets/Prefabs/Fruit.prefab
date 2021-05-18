@@ -338,8 +338,11 @@ MonoBehaviour:
   avaibleGridLayers:
     serializedVersion: 2
     m_Bits: 768
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   raycastLength: 0.7
-  raycastPositionYOffset: 0.5
+  raycastPositionYOffset: 0.45
 --- !u!114 &1150117905
 MonoBehaviour:
   m_ObjectHideFlags: 0
