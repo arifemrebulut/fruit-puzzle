@@ -61,11 +61,4 @@ public class FruitChocolateCovering : MonoBehaviour
             isFullCovered = true;
         }
     }
-
-    public void FinishLevel()
-    {
-        GameManager.SwitchCurrentLevelStat(LevelStats.OnLevelComplete);
-        EventBroker.CallOnFruitComplete();
-        isFullCovered = true;
-    }
 }

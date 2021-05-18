@@ -608,7 +608,7 @@ MonoBehaviour:
   yMoveDuration: 1
   scaleDuration: 0.15
   scaleAmount: {x: 1.15, y: 1.15, z: 1.15}
-  sugarCreationDuration: 2
+  sugarCreationDuration: 3.5
   sugarParticles:
   - {fileID: 3088733474987438073, guid: f413d4db8a9d0184f88bde2dec0bf6e5, type: 3}
   - {fileID: 2786071737413735053, guid: 83063fa6771dffd40a9ce7e7e63e6f84, type: 3}

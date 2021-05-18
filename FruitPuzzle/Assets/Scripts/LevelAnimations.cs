@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
@@ -25,7 +24,6 @@ public class LevelAnimations : MonoBehaviour
 
     [Header("Level Past Animations")]
     [SerializeField] TextMeshProUGUI levelPassedText;
-    [SerializeField] Button nextLevelButton;
     [SerializeField] List<ParticleSystem> levelPassedParticleEffects;
     [SerializeField] float levelPassedTextAnimationDuration;
 
@@ -89,8 +87,6 @@ public class LevelAnimations : MonoBehaviour
  
     private void PlayLevelPassedAnimations()
     {
-        nextLevelButton.transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetDelay(3f);
-
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(levelPassedText.rectTransform.DOScale(new Vector3(2f, 2f, 2f), levelPassedTextAnimationDuration).SetEase(Ease.OutQuad));
@@ -102,7 +98,6 @@ public class LevelAnimations : MonoBehaviour
             
             ParticleSystem effect = Instantiate(levelPassedParticleEffects[i], finishedFruitPosition + new Vector3(0f, 2f, 0f), Quaternion.identity);
         }
-
         
     }
 }

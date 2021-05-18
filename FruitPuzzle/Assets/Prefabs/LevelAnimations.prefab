@@ -56,6 +56,7 @@ MonoBehaviour:
   cameraFinishTargetPosition: {x: 5.68, y: 4.8, z: -12.24}
   cameraFinishTargetRotation: {x: 35.567, y: -59.274, z: -0.177}
   levelPassedText: {fileID: 0}
+  nextLevelButton: {fileID: 0}
   levelPassedParticleEffects:
   - {fileID: 6309203069890578215, guid: 9d1b12dec265c1044808281e2d060995, type: 3}
   - {fileID: 198677243306319532, guid: cfd858b69e847b4468421c2fd8411837, type: 3}
