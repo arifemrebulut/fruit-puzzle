@@ -58,7 +58,7 @@ public class FinishedFruitAnimations : MonoBehaviour
 
     private IEnumerator CreateSugarParticles()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         float elapsedTime = 0f;
 
